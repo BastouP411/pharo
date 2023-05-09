@@ -1,6 +1,12 @@
 Extension { #name : #Process }
 
 { #category : #'*Reflectivity' }
+Process >> executeInLevel: aBlock [
+	self shiftLevelUp.
+	^aBlock ensure: [ self shiftLevelDown ]
+]
+
+{ #category : #'*Reflectivity' }
 Process >> isActive: n [
 	<metaLinkOptions: #( + optionDisabledLink)>
 	^level = n or: [ level == nil ]
